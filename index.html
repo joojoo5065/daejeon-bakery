@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#c07327" />
+<title>대전 빵지순례 · 금요일</title>
+<meta name="description" content="군포 출발 대전 빵집 5곳 루트 — 주차·웨이팅·뭐 살지 한눈에" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ground: #f6f1e8;
+    --ground-2: #efe7d9;
+    --card: #fffdf8;
+    --ink: #2a241b;
+    --muted: #8c8172;
+    --faint: #b4a894;
+    --hair: #e7ddcc;
+    --accent: #bd6b23;
+    --accent-soft: #f3e2ce;
+    --good: #3f7d52;
+    --warn: #b5732a;
+    --alert: #b23b2e;
+    --shadow: 0 1px 2px rgba(70,50,20,.06), 0 8px 22px rgba(70,50,20,.05);
+    --radius: 16px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #16130d;
+      --ground-2: #1e1a12;
+      --card: #201b13;
+      --ink: #f1e9da;
+      --muted: #9d9182;
+      --faint: #6f6455;
+      --hair: #322b1f;
+      --accent: #e2984f;
+      --accent-soft: #3a2c17;
+      --good: #7bb98d;
+      --warn: #dca35f;
+      --alert: #e2796c;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 26px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #f6f1e8; --ground-2: #efe7d9; --card: #fffdf8; --ink: #2a241b;
+    --muted: #8c8172; --faint: #b4a894; --hair: #e7ddcc; --accent: #bd6b23;
+    --accent-soft: #f3e2ce; --good: #3f7d52; --warn: #b5732a; --alert: #b23b2e;
+    --shadow: 0 1px 2px rgba(70,50,20,.06), 0 8px 22px rgba(70,50,20,.05);
+  }
+  :root[data-theme="dark"] {
+    --ground: #16130d; --ground-2: #1e1a12; --card: #201b13; --ink: #f1e9da;
+    --muted: #9d9182; --faint: #6f6455; --hair: #322b1f; --accent: #e2984f;
+    --accent-soft: #3a2c17; --good: #7bb98d; --warn: #dca35f; --alert: #e2796c;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 26px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  html, body { overflow-x: hidden; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Noto Sans KR", system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: env(safe-area-inset-bottom);
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  /* flex/grid children must be allowed to shrink below content width */
+  .prog, .route-line, .callout .tx, .name, .row .val, .sect h2, .bar-title { min-width: 0; }
+  .name small { overflow-wrap: anywhere; }
+  .wrap { max-width: 600px; margin: 0 auto; padding: 0 16px 64px; }
+
+  /* ---- top bar ---- */
+  header.bar {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--ground) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    -webkit-backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--hair);
+  }
+  .bar-in { max-width: 600px; margin: 0 auto; padding: 11px 16px;
+    display: flex; align-items: center; gap: 10px; }
+  .bar-title { font-family: "Noto Serif KR", serif; font-weight: 700;
+    font-size: 16px; letter-spacing: -.01em; }
+  .fri {
+    font-family: "Inter", sans-serif; font-weight: 700; font-size: 11px;
+    letter-spacing: .12em; color: var(--accent);
+    border: 1px solid var(--accent); border-radius: 999px;
+    padding: 2px 8px; line-height: 1.4;
+  }
+  .prog { margin-left: auto; font-family: "Inter", sans-serif;
+    font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .prog b { color: var(--accent); }
+
+  /* ---- hero ---- */
+  .hero { padding: 30px 2px 22px; }
+  .kicker { font-family: "Inter", sans-serif; font-size: 12px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  h1 { font-family: "Noto Serif KR", serif; font-weight: 900;
+    font-size: clamp(30px, 9vw, 42px); line-height: 1.12; letter-spacing: -.02em;
+    margin: 10px 0 0; text-wrap: balance; }
+  h1 .em { color: var(--accent); }
+  .route-line {
+    display: flex; align-items: center; gap: 9px; flex-wrap: wrap;
+    margin-top: 16px; font-family: "Inter", "Noto Sans KR", sans-serif;
+    font-size: 14px; color: var(--muted);
+  }
+  .route-line .dot { width: 5px; height: 5px; border-radius: 50%;
+    background: var(--faint); }
+  .route-line b { color: var(--ink); font-weight: 600;
+    font-variant-numeric: tabular-nums; }
+
+  /* ---- callout ---- */
+  .callout {
+    display: flex; gap: 12px; margin-top: 20px; padding: 15px 16px;
+    background: var(--accent-soft); border: 1px solid transparent;
+    border-radius: var(--radius);
+  }
+  .callout .ic { flex: none; font-size: 20px; line-height: 1.3; }
+  .callout .tx { font-size: 13.5px; }
+  .callout .tx strong { color: var(--accent); }
+  .callout .tx small { display: block; color: var(--muted); margin-top: 3px;
+    font-size: 12px; }
+
+  /* ---- section label ---- */
+  .sect { display: flex; align-items: baseline; gap: 10px;
+    margin: 34px 2px 4px; }
+  .sect .no { font-family: "Inter", sans-serif; font-weight: 700; font-size: 12px;
+    color: var(--accent); letter-spacing: .1em; }
+  .sect h2 { font-family: "Noto Serif KR", serif; font-weight: 700;
+    font-size: 20px; margin: 0; letter-spacing: -.01em; }
+  .sect .meta { margin-left: auto; font-size: 11.5px; color: var(--muted);
+    font-family: "Inter", "Noto Sans KR", sans-serif; }
+
+  /* ---- timeline ---- */
+  .line { position: relative; margin-top: 14px; padding-left: 34px; }
+  .line::before { content: ""; position: absolute; left: 12px; top: 6px; bottom: 20px;
+    width: 2px; background: linear-gradient(var(--hair), var(--hair)); }
+
+  .stop { position: relative; margin-bottom: 16px; }
+  .stop .node {
+    position: absolute; left: -34px; top: 4px; width: 26px; height: 26px;
+    border-radius: 50%; background: var(--card); border: 2px solid var(--accent);
+    color: var(--accent); font-family: "Inter", sans-serif; font-weight: 700;
+    font-size: 12px; display: grid; place-items: center; z-index: 2;
+    font-variant-numeric: tabular-nums;
+  }
+  .stop.done .node { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .card {
+    background: var(--card); border: 1px solid var(--hair);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 15px 15px 14px; transition: opacity .25s, transform .1s;
+  }
+  .stop.done .card { opacity: .58; }
+
+  .card .top { display: flex; align-items: flex-start; gap: 10px; }
+  .time {
+    flex: none; font-family: "Inter", sans-serif; font-weight: 700; font-size: 13px;
+    color: var(--accent); background: var(--accent-soft);
+    border-radius: 8px; padding: 3px 8px; font-variant-numeric: tabular-nums;
+    letter-spacing: .01em;
+  }
+  .time.anytime { color: var(--muted); background: var(--ground-2); }
+  .name { font-family: "Noto Serif KR", serif; font-weight: 700; font-size: 18px;
+    line-height: 1.25; margin: 0; letter-spacing: -.01em; }
+  .name small { display: block; font-family: "Noto Sans KR"; font-weight: 400;
+    font-size: 12px; color: var(--muted); margin-top: 2px; letter-spacing: 0; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 11px 0 0; }
+  .chip { font-size: 12.5px; font-weight: 500; padding: 4px 9px; border-radius: 999px;
+    background: var(--ground-2); color: var(--ink); }
+  .chip.star { background: var(--accent); color: #fff; }
+
+  .rows { margin-top: 11px; display: flex; flex-direction: column; gap: 7px; }
+  .row { display: flex; gap: 9px; font-size: 13px; align-items: flex-start; }
+  .row .lab { flex: none; width: 52px; color: var(--muted); font-size: 11.5px;
+    font-weight: 500; padding-top: 1px; }
+  .row .val { color: var(--ink); }
+  .row .val .warnt { color: var(--warn); font-weight: 500; }
+  .row .val .alertt { color: var(--alert); font-weight: 600; }
+
+  .actions { display: flex; gap: 8px; margin-top: 13px; }
+  .btn {
+    flex: 1; display: inline-flex; align-items: center; justify-content: center;
+    gap: 6px; text-decoration: none; font-size: 13px; font-weight: 600;
+    font-family: "Noto Sans KR", sans-serif;
+    padding: 9px 10px; border-radius: 10px; border: 1px solid var(--hair);
+    color: var(--ink); background: transparent; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn.map { border-color: var(--accent); color: var(--accent); }
+  .btn:active { transform: scale(.98); }
+  .btn.check[aria-pressed="true"] { background: var(--good); border-color: var(--good);
+    color: #fff; }
+
+  /* ---- parking table ---- */
+  .fees { margin-top: 14px; background: var(--card); border: 1px solid var(--hair);
+    border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  .fees h3 { font-family: "Noto Serif KR", serif; font-size: 16px; margin: 0;
+    padding: 14px 16px 4px; }
+  .fees p.sub { margin: 0; padding: 0 16px 10px; font-size: 12px; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 10px 16px; border-top: 1px solid var(--hair); }
+  th { font-family: "Inter","Noto Sans KR",sans-serif; font-weight: 600; font-size: 11.5px;
+    color: var(--muted); letter-spacing: .02em; }
+  td.fee { text-align: right; font-family: "Inter", sans-serif; font-weight: 700;
+    font-variant-numeric: tabular-nums; }
+  td.free { color: var(--good); }
+  .fees .note { padding: 11px 16px; font-size: 12px; color: var(--muted);
+    background: var(--ground-2); border-top: 1px solid var(--hair); }
+  .fees .note b { color: var(--ink); }
+
+  footer { margin-top: 30px; text-align: center; font-size: 11.5px; color: var(--faint);
+    font-family: "Inter","Noto Sans KR",sans-serif; line-height: 1.7; }
+
+  .reset { display: inline-block; margin-top: 10px; font-size: 12px; color: var(--muted);
+    background: none; border: 1px solid var(--hair); border-radius: 8px;
+    padding: 6px 12px; cursor: pointer; font-family: inherit; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="bar-in">
+    <span class="bar-title">🥐 대전 빵지순례</span>
+    <span class="fri">FRI</span>
+    <span class="prog"><b id="pdone">0</b>/6 완료</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="kicker">Gunpo → Daejeon · Bread Run</div>
+    <h1>대전 빵집 다섯 곳,<br /><span class="em">동선 하나로.</span></h1>
+    <div class="route-line">
+      <span>군포 <b>08:00</b> 출발</span><span class="dot"></span>
+      <span>대전 <b>10:00</b> 도착</span><span class="dot"></span>
+      <span>미미제과점 제외 · 총 <b>5</b>곳</span>
+    </div>
+  </section>
+
+  <div class="callout">
+    <span class="ic">🎫</span>
+    <span class="tx">
+      <strong>주차 치트키:</strong> 성심당 <b>본점</b>과 <b>케익부띠끄</b>에서 각각 1만원 이상 사고 <strong>주차권 2장</strong> 받으면 <strong>2시간 무료</strong>.
+      <small>결제할 때 "주차권 주세요" 꼭 말하기 · 우리들공원 주차장에 대면 성심당·몽심까지 걸어서 한 번에.</small>
+    </span>
+  </div>
+
+  <!-- ================= 원도심 ================= -->
+  <div class="sect">
+    <span class="no">PART 1</span>
+    <h2>원도심 · 주차 한 번</h2>
+    <span class="meta">우리들공원 주차 → 도보</span>
+  </div>
+
+  <div class="line">
+
+    <!-- 1 성심당 본점 -->
+    <div class="stop" data-id="seongsimdang">
+      <div class="node">1</div>
+      <div class="card">
+        <div class="top">
+          <span class="time">10:00</span>
+          <h3 class="name">성심당 본점<small>중구 대종로480번길 15 · 연중무휴 08–22시</small></h3>
+        </div>
+        <div class="chips">
+          <span class="chip star">튀김소보로</span>
+          <span class="chip">부추빵</span>
+        </div>
+        <div class="rows">
+          <div class="row"><span class="lab">주차</span><span class="val"><b>우리들공원 주차장</b> (본점 170m) — 여기가 원도심 거점</span></div>
+          <div class="row"><span class="lab">웨이팅</span><span class="val">평일도 1시간+ · <span class="warnt">오전 10시가 골든타임</span> (12–16시 최악)</span></div>
+          <div class="row"><span class="lab">팁</span><span class="val">도착하자마자 1번으로 직행. 주차권 받는 것 잊지 말기</span></div>
+        </div>
+        <div class="actions">
+          <a class="btn map" href="https://map.naver.com/p/search/성심당%20본점" target="_blank" rel="noopener">🗺️ 지도</a>
+          <button class="btn check" aria-pressed="false">완료</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 케익부띠끄 -->
+    <div class="stop" data-id="cake">
+      <div class="node">2</div>
+      <div class="card">
+        <div class="top">
+          <span class="time anytime">바로 옆</span>
+          <h3 class="name">성심당 케익부띠끄<small>본점서 대로 건너 · 주차권 2번째 장</small></h3>
+        </div>
+        <div class="chips">
+          <span class="chip">롤케익</span>
+          <span class="chip">디저트</span>
+          <span class="chip star">🎫 주차권 +1</span>
+        </div>
+        <div class="rows">
+          <div class="row"><span class="lab">핵심</span><span class="val">여기서 1만원↑ 사면 <b>주차권 2장 = 2시간 무료</b> 완성</span></div>
+        </div>
+        <div class="actions">
+          <a class="btn map" href="https://map.naver.com/p/search/성심당%20케익부띠끄" target="_blank" rel="noopener">🗺️ 지도</a>
+          <button class="btn check" aria-pressed="false">완료</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 몽심 대흥점 -->
+    <div class="stop" data-id="mongsim">
+      <div class="node">3</div>
+      <div class="card">
+        <div class="top">
+          <span class="time">11:00</span>
+          <h3 class="name">몽심 대흥점<small>중구 중교로 29 · 우리들공원서 도보권</small></h3>
+        </div>
+        <div class="chips">
+          <span class="chip star">바게트</span>
+          <span class="chip">치아바타</span>
+          <span class="chip">휘낭시에</span>
+        </div>
+        <div class="rows">
+          <div class="row"><span class="lab">주차</span><span class="val">따로 안 댐 — <b>성심당 주차권 2시간 안에</b> 걸어서 다녀오기</span></div>
+          <div class="row"><span class="lab">주문</span><span class="val"><span class="warnt">쿠팡이츠 픽업 미리 주문</span> → 웨이팅 0, 대기 없이 픽업</span></div>
+          <div class="row"><span class="lab">팁</span><span class="val">대흥점은 바게트·치아바타 라인. (도안점=소금빵)</span></div>
+        </div>
+        <div class="actions">
+          <a class="btn map" href="https://map.naver.com/p/search/몽심%20대흥점" target="_blank" rel="noopener">🗺️ 지도</a>
+          <button class="btn check" aria-pressed="false">완료</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 정동문화사 -->
+    <div class="stop" data-id="jeongdong">
+      <div class="node">4</div>
+      <div class="card">
+        <div class="top">
+          <span class="time">12:00</span>
+          <h3 class="name">정동문화사<small>동구 창조2길 11 · 대전역 옆 (월·화 휴무)</small></h3>
+        </div>
+        <div class="chips">
+          <span class="chip star">에그타르트 ★</span>
+          <span class="chip">휘낭시에</span>
+          <span class="chip">까눌레</span>
+        </div>
+        <div class="rows">
+          <div class="row"><span class="lab">주차</span><span class="val">매장 옆 있으나 골목 좁음 → <b>대전역 공영주차장</b> 권장</span></div>
+          <div class="row"><span class="lab">시간</span><span class="val"><span class="alertt">금요일 12:00 오픈</span> · 번호표 9시부터·11:40경 판매</span></div>
+          <div class="row"><span class="lab">팁</span><span class="val">원도심 마지막. 지나갈 때 번호표 먼저 뽑아두면 유리</span></div>
+        </div>
+        <div class="actions">
+          <a class="btn map" href="https://map.naver.com/p/search/정동문화사%20대전" target="_blank" rel="noopener">🗺️ 지도</a>
+          <button class="btn check" aria-pressed="false">완료</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= 서구 ================= -->
+  <div class="sect">
+    <span class="no">PART 2</span>
+    <h2>서구 · 오후</h2>
+    <span class="meta">대전역 → 둔산 약 20분</span>
+  </div>
+
+  <div class="line">
+
+    <!-- 5 하레하레 -->
+    <div class="stop" data-id="harehare">
+      <div class="node">5</div>
+      <div class="card">
+        <div class="top">
+          <span class="time anytime">오후</span>
+          <h3 class="name">하레하레 <small>갤러리아 타임월드점 · 백화점 입점</small></h3>
+        </div>
+        <div class="chips">
+          <span class="chip star">쌀치즈카스테라</span>
+        </div>
+        <div class="rows">
+          <div class="row"><span class="lab">주차</span><span class="val"><b>백화점 주차장</b> — 서구에서 제일 편한 거점 (구매 시 무료)</span></div>
+          <div class="row"><span class="lab">팁</span><span class="val">쌀치즈카스테라 <span class="warnt">매시 정각 출고·1인 1개</span> → 정각 타이밍</span></div>
+        </div>
+        <div class="actions">
+          <a class="btn map" href="https://map.naver.com/p/search/하레하레%20갤러리아타임월드" target="_blank" rel="noopener">🗺️ 지도</a>
+          <button class="btn check" aria-pressed="false">완료</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 꾸드뱅 -->
+    <div class="stop" data-id="goodbank">
+      <div class="node">6</div>
+      <div class="card">
+        <div class="top">
+          <span class="time anytime">오후</span>
+          <h3 class="name">꾸드뱅 베이커스 하우스<small>서구 둔산남로9번길 71 · 시청역 · 갤러리아서 차 5분</small></h3>
+        </div>
+        <div class="chips">
+          <span class="chip star">치아바타</span>
+          <span class="chip">식사빵</span>
+        </div>
+        <div class="rows">
+          <div class="row"><span class="lab">주차</span><span class="val">전용 없음 → <b>도로변(노상)</b>, 짧게 대고 픽업</span></div>
+          <div class="row"><span class="lab">팁</span><span class="val">블루리본 7년 연속 · 식사빵이라 집 와서 먹기 좋음 → 마지막에</span></div>
+        </div>
+        <div class="actions">
+          <a class="btn map" href="https://map.naver.com/p/search/꾸드뱅%20베이커스하우스" target="_blank" rel="noopener">🗺️ 지도</a>
+          <button class="btn check" aria-pressed="false">완료</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= 주차 요금 ================= -->
+  <div class="fees">
+    <h3>🅿️ 우리들공원 주차 요금</h3>
+    <p class="sub">금요일 = 유료 (일·공휴일은 무료) · 성심당 주차권 2장으로 2시간 무료</p>
+    <table>
+      <thead><tr><th>실제 주차 시간</th><th style="text-align:right">내는 돈</th></tr></thead>
+      <tbody>
+        <tr><td>2시간 이내</td><td class="fee free">0원</td></tr>
+        <tr><td>2시간 30분</td><td class="fee">1,200원</td></tr>
+        <tr><td>3시간</td><td class="fee">2,400원</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      요금 체계: 최초 10분 300원 → 2시간까지 10분당 200원 → 초과분 10분당 400원.<br />
+      <b>성심당 전용주차장은 비추</b> — 무료 후 10분당 1,200원(시간당 6,000원)에 골목도 혼잡.
+    </div>
+  </div>
+
+  <footer>
+    체크는 이 폰에만 저장돼요 (localStorage) · 웨이팅·시간은 방문일에 따라 달라질 수 있음<br />
+    <button class="reset" id="reset">체크 초기화</button>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var KEY = "daejeon-bread-run-v1";
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { state = {}; }
+
+    var stops = Array.prototype.slice.call(document.querySelectorAll(".stop"));
+    var pdone = document.getElementById("pdone");
+
+    function render() {
+      var n = 0;
+      stops.forEach(function (stop) {
+        var id = stop.getAttribute("data-id");
+        var on = !!state[id];
+        var btn = stop.querySelector(".btn.check");
+        stop.classList.toggle("done", on);
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+        btn.textContent = on ? "✓ 완료" : "완료";
+        if (on) n++;
+      });
+      pdone.textContent = n;
+    }
+
+    stops.forEach(function (stop) {
+      var id = stop.getAttribute("data-id");
+      stop.querySelector(".btn.check").addEventListener("click", function () {
+        state[id] = !state[id];
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+        render();
+      });
+    });
+
+    document.getElementById("reset").addEventListener("click", function () {
+      state = {};
+      try { localStorage.removeItem(KEY); } catch (e) {}
+      render();
+    });
+
+    render();
+  })();
+</script>
+</body>
+</html>
